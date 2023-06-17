@@ -5,10 +5,34 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ApiResponse handleMethodArgumentNotValidException(final MethodArgumentNotValidException exception,
+                                                                                         final HttpServletRequest request){
+        List<String> errors = new ArrayList<>();
+        for (FieldError fieldError : exception.getBindingResult().getFieldErrors()){
+            errors.add(fieldError.getField() + " -> " + fieldError.getDefaultMessage());
+        }
+
+        ApiResponse error = new ApiResponse();
+        error.setSuccess(false);
+        error.setStatus(HttpStatus.BAD_REQUEST);
+        error.setMessage("handleMethodArgumentNotValidException" + " " + errors);
+        error.setRequestedURI(request.getRequestURI());
+
+        return error;
+    }
 
     //Response<Entity> with @ResponseBody
     @ExceptionHandler(HttpMessageNotReadableException.class)

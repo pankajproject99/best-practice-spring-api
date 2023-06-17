@@ -4,6 +4,7 @@ import com.example.bestpracticespringapi.dto.ApiResponse;
 import com.example.bestpracticespringapi.dto.ParticipantDto;
 import com.example.bestpracticespringapi.exception.ResourceNotFoundException;
 import com.example.bestpracticespringapi.service.ParticipantService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class ParticipantController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ParticipantDto> updateParticipant(@PathVariable long id, @RequestBody ParticipantDto participantDto) throws ResourceNotFoundException {
+    public ResponseEntity<ParticipantDto> updateParticipant(@PathVariable long id, @Valid @RequestBody ParticipantDto participantDto) throws ResourceNotFoundException {
         ParticipantDto participantDtoResponse = participantService.updateParticipant(id, participantDto);
         return ResponseEntity.ok().body(participantDtoResponse);
     }
