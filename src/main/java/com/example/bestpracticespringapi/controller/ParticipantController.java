@@ -26,8 +26,8 @@ public class ParticipantController {
     }
 
     @GetMapping
-    public List<ParticipantDto> getAllParticipants(){
-        return participantService.getAllParticipants();
+    public ResponseEntity<List<ParticipantDto>> getAllParticipants(){
+        return ResponseEntity.ok().body(participantService.getAllParticipants());
     }
 
     @PostMapping
