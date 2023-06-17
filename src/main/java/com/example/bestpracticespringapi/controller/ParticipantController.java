@@ -4,9 +4,6 @@ import com.example.bestpracticespringapi.dto.ApiResponse;
 import com.example.bestpracticespringapi.dto.ParticipantDto;
 import com.example.bestpracticespringapi.exception.ResourceNotFoundException;
 import com.example.bestpracticespringapi.service.ParticipantService;
-import jakarta.servlet.http.Part;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/participants") // use plural names
 public class ParticipantController {
-//    @Autowired
-//    ModelMapper modelMapper; // moved to service
 
     ParticipantService participantService;
 
@@ -26,8 +21,12 @@ public class ParticipantController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ParticipantDto>> getAllParticipants(){
-        return ResponseEntity.ok().body(participantService.getAllParticipants());
+    public ResponseEntity<ApiResponse> getAllParticipants(){
+        List<ParticipantDto> participantDtoList = participantService.getAllParticipants();
+        ApiResponse apiResponse = new ApiResponse(Boolean.TRUE, "Participant Get List", HttpStatus.OK, participantDtoList);
+
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+//        return ResponseEntity.ok().body(participantService.getAllParticipants());
     }
 
     @PostMapping

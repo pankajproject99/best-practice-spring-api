@@ -4,11 +4,26 @@ import com.example.bestpracticespringapi.dto.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.annotation.*;
 
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice {
+
+    //Response<Entity> with @ResponseBody
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ApiResponse handleHttpMessageNotReadableExceptionWithSpringAnnotationResponse(final HttpMessageNotReadableException exception,
+                                                              final HttpServletRequest request){
+        ApiResponse error = new ApiResponse();
+        error.setSuccess(false);
+        error.setStatus(HttpStatus.BAD_REQUEST);
+        error.setMessage("httpMessageNotReadableException" + " " + exception.getMessage() + " " + request.getLocalPort());
+        error.setRequestedURI(request.getRequestURI());
+
+        return error;
+    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
 //    @ResponseStatus(value = HttpStatus.NOT_FOUND)
