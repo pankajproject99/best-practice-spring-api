@@ -28,4 +28,16 @@
 
 ![img_1.png](img_1.png)
 
+Out put from Postman For Valid
+Handling Exception via Controller Advice
+![img_2.png](img_2.png)
+
+Service gave NoResource FOund to Controller
+and Controller Handleded Exception with Controller Advice
+![img_3.png](img_3.png)
+
+COntroller gave API Response for Allget call
+![img_4.png](img_4.png)
+
+
 
