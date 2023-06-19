@@ -40,4 +40,17 @@ COntroller gave API Response for Allget call
 ![img_4.png](img_4.png)
 
 
+#### Step 3 : best practice : Test Coverage JACOCO
+https://www.lambdatest.com/blog/reporting-code-coverage-using-maven-and-jacoco-plugin/
 
+Coverage Before
+![img_6.png](img_6.png)
+![img_5.png](img_5.png)
+![img_7.png](img_7.png)
+https://www.baeldung.com/spring-boot-bean-validation
+https://reflectoring.io/spring-boot-web-controller-test/
+
+Coverage After 3 controller method test implementation, 
+![img_9.png](img_9.png)
+![img_10.png](img_10.png)
+![img_11.png](img_11.png)
