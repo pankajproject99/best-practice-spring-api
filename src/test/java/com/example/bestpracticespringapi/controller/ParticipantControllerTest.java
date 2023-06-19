@@ -16,8 +16,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest //Provides Spring Boot Context
@@ -49,14 +53,72 @@ class ParticipantControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/participants")
                         .content(responseBody)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(responseContentType))
                 .andExpect(MockMvcResultMatchers.content().json(responseBody))
         ;
     }
 
     @Test
-    void createParticipant() {
+    void createParticipant() throws Exception {
+        ParticipantDto participantDtoRequest = new ParticipantDto();
+        participantDtoRequest.setName("mmm");
+        participantDtoRequest.setAge(200);
+
+        MediaType responseContentType = new MediaType(MediaType.APPLICATION_JSON);
+        ParticipantDto participantDtoResponse = new ParticipantDto();
+        participantDtoResponse.setId(1L);
+        participantDtoResponse.setName("mmm");
+        participantDtoResponse.setAge(200);
+
+        Mockito.when(participantService.createParticipant(participantDtoRequest)).thenReturn(participantDtoResponse);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/participants")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(participantDtoRequest)))
+                .andExpect(status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().contentType(responseContentType))
+                .andExpect(MockMvcResultMatchers.content().string(objectMapper.writeValueAsString(participantDtoResponse)));
+
+        //2nd Way Break in 2 parts. Gives more options
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/participants")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(participantDtoRequest)))
+                .andReturn();
+
+        String actualResponseBody = mvcResult.getResponse().getContentAsString();
+
+        assertThat(actualResponseBody).isEqualToIgnoringWhitespace(
+                objectMapper.writeValueAsString(participantDtoResponse));
+
+    }
+
+    @Test
+    void createParticipantFieldValidationFailed() throws Exception {
+        // Missing mandatory name
+        ParticipantDto participantDtoRequest = new ParticipantDto();
+        participantDtoRequest.setAge(200);
+
+        MediaType responseContentType = new MediaType(MediaType.APPLICATION_JSON);
+
+        //Test status and save result
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/participants")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(participantDtoRequest)))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String actualResponseBody = mvcResult.getResponse().getContentAsString();
+
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setMessage("handleMethodArgumentNotValidException [name -> Name is mandatory]");
+        apiResponse.setStatus(HttpStatus.BAD_REQUEST);
+        apiResponse.setRequestedURI("/api/participants");
+        apiResponse.setSuccess(false);
+        String expectedResponseBody = objectMapper.writeValueAsString(apiResponse);
+
+        assertThat(actualResponseBody).isEqualToIgnoringWhitespace(expectedResponseBody);
+
     }
 
     @Test
@@ -83,7 +145,7 @@ class ParticipantControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.put("/api/participants/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(participantDtoRequest)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(objectMapper.writeValueAsString(participantDtoResponse)))
                 .andExpect(MockMvcResultMatchers.content().contentType(responseContentType));
 
@@ -111,7 +173,7 @@ class ParticipantControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.put("/api/participants/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(participantDtoRequest)))
-                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(status().isNotFound())
                 .andExpect(MockMvcResultMatchers.content().string(objectMapper.writeValueAsString(apiResponse)))
                 .andExpect(MockMvcResultMatchers.content().contentType(responseContentType));
     }

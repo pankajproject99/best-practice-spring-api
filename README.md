@@ -59,3 +59,13 @@ Run Code Insect Code_31Warnings__Before
 ![img_8.png](src/main/resources/img/readme/img_8.png)
 After Some Cleanup
 ![img_12.png](src/main/resources/img/readme/img_12.png)
+
+#### Step 3_2 : best practice : Test Coverage Selenium
+clean verify : to check code rules set in jacoco:check goal are met or not.
+![img.png](src/main/resources/img/readme/img13.png)
+
+Selenium provides better
+    browser coverage
+    Parallel testing
+
+https://reflectoring.io/spring-boot-web-controller-test/
