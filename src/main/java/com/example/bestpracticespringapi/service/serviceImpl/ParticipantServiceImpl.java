@@ -37,9 +37,8 @@ public class ParticipantServiceImpl implements ParticipantService {
     public ParticipantDto createParticipant(ParticipantDto participantDto) {
         Participant participant = modelMapper.map(participantDto, Participant.class);
         Participant part = participantRepository.save(participant);
-        ParticipantDto participantDtoResponse = modelMapper.map(part, ParticipantDto.class);
 
-        return participantDtoResponse;
+        return modelMapper.map(part, ParticipantDto.class);
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/participants") // use plural names
 public class ParticipantController {
 
-    ParticipantService participantService;
+    final ParticipantService participantService;
 
     public ParticipantController(ParticipantService participantService) {
         this.participantService = participantService;

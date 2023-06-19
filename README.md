@@ -32,11 +32,11 @@ Out put from Postman For Valid
 Handling Exception via Controller Advice
 ![img_2.png](img_2.png)
 
-Service gave NoResource FOund to Controller
-and Controller Handleded Exception with Controller Advice
+Service gave NoResource Found to Controller
+and Controller Handled Exception with Controller Advice
 ![img_3.png](img_3.png)
 
-COntroller gave API Response for Allget call
+Controller gave API Response for All get call
 ![img_4.png](img_4.png)
 
 
@@ -54,3 +54,8 @@ Coverage After 3 controller method test implementation,
 ![img_9.png](img_9.png)
 ![img_10.png](img_10.png)
 ![img_11.png](img_11.png)
+
+Run Code Insect Code_31Warnings__Before
+![img_8.png](img_8.png)
+After Some Cleanup
+![img_12.png](img_12.png)

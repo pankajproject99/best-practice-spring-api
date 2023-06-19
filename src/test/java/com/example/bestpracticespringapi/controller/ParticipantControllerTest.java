@@ -21,8 +21,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest //Provides Spring Boot Context
-//@WebMvcTest(controllers = ParticipantController.class) // can also be used instead of Autowire controller.
-// Also we are restricting controller to narrow down application context
+//@WebMvcTest(controllers = ParticipantController.class) // can also be used instead of Auto wiring controller.
+// Also, we are restricting controller to narrow down application context
 @AutoConfigureMockMvc
 class ParticipantControllerTest {
 
