@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Tag("IntegrationTest") // can have different tag for UnitTest and IntegrationTest
 //@ActiveProfiles("integration-test") // can use different profile and use application.properties
 @DataJpaTest(showSql = true) // Mock JPA
+//@SpringBootTest // if used same context will be used for all test, otherwise each run will have its own context
 @Sql(statements = {
         "INSERT INTO participant(part_id, name, age) VALUES(1L, 'xyz', 5)",
         "INSERT INTO participant(part_id, name, age) VALUES(2L, 'abc', 10)",
