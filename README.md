@@ -75,3 +75,4 @@ Tags for Integration Test and Unit Test
 https://medium.com/edataconsulting/how-to-add-integration-tests-to-our-spring-boot-backend-8ab00313b6ad
 
     To run our tests, we can execute any of these commands: mvn verify, mvn install, or mvn deploy.
+    With Spring Boot 1.4, things should get simpler. There is a single @SpringBootTest annotation to use for regular tests
