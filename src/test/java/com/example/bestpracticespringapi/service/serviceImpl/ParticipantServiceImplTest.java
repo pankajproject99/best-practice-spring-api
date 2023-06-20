@@ -50,7 +50,10 @@ class ParticipantServiceImplTest {
 
         //Assert
         assertEquals(participantsMock.size(), participantDtosResponse.size());
-        assertEquals(modelMapper.map(participantsMock.get(1), ParticipantDto.class), participantDtosResponse.get(1));
+        // Asset all objects
+        for( int i = 0; i < participantsMock.size(); i++){
+            assertEquals(modelMapper.map(participantsMock.get(i), ParticipantDto.class), participantDtosResponse.get(i));
+        }
 
     }
 

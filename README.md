@@ -69,3 +69,9 @@ Selenium provides better
     Parallel testing
 
 https://reflectoring.io/spring-boot-web-controller-test/
+
+
+Tags for Integration Test and Unit Test
+https://medium.com/edataconsulting/how-to-add-integration-tests-to-our-spring-boot-backend-8ab00313b6ad
+
+    To run our tests, we can execute any of these commands: mvn verify, mvn install, or mvn deploy.
