@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -30,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //Using sql as TestEntityManager is not working
 class ParticipantRepositoryTest {
 
-//    @MockBean
+//    @Autowired
 //    private TestEntityManager entityManager;
 
     @Autowired
@@ -42,8 +44,8 @@ class ParticipantRepositoryTest {
         //Mock data
         Participant participant1 = new Participant(1L, "xyz", 5);
         Participant participant2 = new Participant(2L, "abc", 10);
-//        entityManager.persist(participant1);
-//        entityManager.persist(participant2);
+//        this.entityManager.persist(participant1);
+//        this.entityManager.persist(participant2);
 //        entityManager.flush();
 
         //Call
@@ -54,6 +56,7 @@ class ParticipantRepositoryTest {
         assertThat(participantRepository.findAll())
                 .extracting(Participant::getName)
                         .containsExactly("xyz", "abc");
+        assertThat(participants.size()).isEqualTo(2);
 
         //traditional assert
         assertEquals(2, participants.size());
