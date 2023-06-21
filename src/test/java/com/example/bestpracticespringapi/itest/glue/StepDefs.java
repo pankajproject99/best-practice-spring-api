@@ -20,7 +20,8 @@ import static org.junit.Assert.assertEquals;
 public class StepDefs {
 
 
-    final private Object baseUrl = "http://localhost:8080";
+    final private String baseUrl = "http://localhost:8080";
+    private int actResponseCode;
 
     private void callApiMethod(final String method, final String service) throws IOException {
         final CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -37,6 +38,7 @@ public class StepDefs {
         }
 
         final CloseableHttpResponse response = httpClient.execute(request);
+        actResponseCode = response.getStatusLine().getStatusCode();
     }
 
     @When("I send a {string} request to {string}")
@@ -45,8 +47,8 @@ public class StepDefs {
     }
 
     @Then("I get a response code {int}")
-    public void apiResponseCode(Integer code) {
+    public void apiResponseCode(final int code) {
         // Write code here that turns the phrase above into concrete actions
-        assertEquals(java.util.Optional.of(200), code);
+        assertEquals("Wrong response code returned", code, actResponseCode);
     }
 }

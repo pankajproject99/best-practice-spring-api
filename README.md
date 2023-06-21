@@ -76,3 +76,9 @@ https://medium.com/edataconsulting/how-to-add-integration-tests-to-our-spring-bo
 
     To run our tests, we can execute any of these commands: mvn verify, mvn install, or mvn deploy.
     With Spring Boot 1.4, things should get simpler. There is a single @SpringBootTest annotation to use for regular tests
+
+Cucumber Integration test
+This needs runing system use for E2E
+https://www.baeldung.com/cucumber-spring-integration
+With cucumber report under target/cucumber-report.html
+![img.png](img.png)
