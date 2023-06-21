@@ -82,3 +82,9 @@ This needs runing system use for E2E
 https://www.baeldung.com/cucumber-spring-integration
 With cucumber report under target/cucumber-report.html
 ![img.png](img.png)
+
+
+Separate Unit Test with Cucumber Integration Test TOBE
+![img_1.png](img_1.png)
+https://stackoverflow.com/questions/18164579/how-do-i-specify-a-separate-maven-goal-for-running-cucumber-acceptance-tests
+http://www.weblogism.com/item/334/integration-tests-with-cucumber-jvm-selenium-and-maven
