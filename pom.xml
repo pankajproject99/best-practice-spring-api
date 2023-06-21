@@ -15,6 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<cucmber.version>6.8.0</cucmber.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -81,6 +82,26 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.52.0</version>
+			<scope>test</scope>
+		</dependency>
+
+<!--		Cucmber for Spring boot integration test,cucmber=java cucumber-junit, cucumber-spring-->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucmber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>${cucmber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-spring</artifactId>
+			<version>${cucmber.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

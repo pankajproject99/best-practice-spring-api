@@ -1,5 +1,6 @@
 package com.example.bestpracticespringapi.controller;
 
+import com.example.bestpracticespringapi.customAnnotation.IntegrationTest;
 import com.example.bestpracticespringapi.dto.ApiResponse;
 import com.example.bestpracticespringapi.dto.ParticipantDto;
 import com.example.bestpracticespringapi.exception.ResourceNotFoundException;
@@ -28,7 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@WebMvcTest(controllers = ParticipantController.class) // can also be used instead of Auto wiring controller.
 // Also, we are restricting controller to narrow down application context
 @AutoConfigureMockMvc
-class ParticipantControllerTest {
+@IntegrationTest
+class ParticipantControllerIntegrationTest {
 
     @Autowired
     ObjectMapper objectMapper; // beans automatically provided by Spring boot for mapping Json
