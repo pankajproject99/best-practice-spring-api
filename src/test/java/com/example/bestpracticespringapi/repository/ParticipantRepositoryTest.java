@@ -2,15 +2,11 @@ package com.example.bestpracticespringapi.repository;
 
 import com.example.bestpracticespringapi.customAnnotation.IntegrationTest;
 import com.example.bestpracticespringapi.model.Participant;
+import org.junit.Test;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -30,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         "INSERT INTO participant(part_id, name, age) VALUES(2L, 'abc', 10)",
 })
 //Using sql as TestEntityManager is not working
-class ParticipantRepositoryTest {
+public class ParticipantRepositoryTest {
 
 //    @Autowired
 //    private TestEntityManager entityManager;
