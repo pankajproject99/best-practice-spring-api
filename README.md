@@ -96,3 +96,8 @@ Solution1 : @Tag(UnitTest)
 Solution2: Create custom annotation eg @IntegrationTest
 ![img_3.png](img_3.png)
 ![img_4.png](img_4.png)
+
+Run all Test from Junit
+This runs all test Unit, Integration, Cucumber etc
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
