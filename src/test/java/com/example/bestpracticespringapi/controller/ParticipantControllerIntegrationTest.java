@@ -6,6 +6,7 @@ import com.example.bestpracticespringapi.dto.ParticipantDto;
 import com.example.bestpracticespringapi.exception.ResourceNotFoundException;
 import com.example.bestpracticespringapi.service.ParticipantService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;

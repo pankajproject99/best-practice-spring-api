@@ -4,6 +4,7 @@ import com.example.bestpracticespringapi.customAnnotation.UnitTest;
 import com.example.bestpracticespringapi.dto.ApiResponse;
 import com.example.bestpracticespringapi.dto.ParticipantDto;
 import com.example.bestpracticespringapi.service.ParticipantService;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,6 +21,7 @@ import static org.mockito.Mockito.when;
 
 @UnitTest
 @ExtendWith(MockitoExtension.class) // important
+@Tag("UnitTest") // Tagging to separate out test and run from run configuration
 public class ParticipantControllerUnitTest {
 
     @Mock
