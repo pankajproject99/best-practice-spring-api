@@ -88,3 +88,11 @@ Separate Unit Test with Cucumber Integration Test TOBE
 ![img_1.png](img_1.png)
 https://stackoverflow.com/questions/18164579/how-do-i-specify-a-separate-maven-goal-for-running-cucumber-acceptance-tests
 http://www.weblogism.com/item/334/integration-tests-with-cucumber-jvm-selenium-and-maven
+
+Run JUNIT Test separately for different type
+like UnitTest, IntegrationTest
+Solution1 : @Tag(UnitTest)
+![img_2.png](img_2.png)
+Solution2: Create custom annotation eg @IntegrationTest
+![img_3.png](img_3.png)
+![img_4.png](img_4.png)
