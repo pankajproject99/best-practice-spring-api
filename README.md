@@ -100,4 +100,7 @@ Solution2: Create custom annotation e.g. @IntegrationTest
 Run all Test from Junit
 This runs all test Unit, Integration, Cucumber etc
 ![img_5.png](img_5.png)
-![img_6.png](img_6.png)
+![img_6.png](img_6.png
+
+Coverage Above 80% now
+![img_7.png](img_7.png)
