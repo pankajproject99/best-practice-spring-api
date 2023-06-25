@@ -19,12 +19,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.mockito.Mockito.when;
 
-
+// Unit test without Spring context, this is quick
 @ExtendWith(MockitoExtension.class)
-//@SpringBootTest
 public class ParticipantServiceImpUnitTest {
 
     @Mock
@@ -70,5 +70,53 @@ public class ParticipantServiceImpUnitTest {
 
         //Assert
         assertIterableEquals(participantDtos, response);
+    }
+
+    @Test
+    void createParticipant() {
+        //Unit test without Spring is difficult as you have to Mock behaviour of each component like ModelMaper here
+        // Implement same using Spring test
+        //Mock Data
+        ParticipantDto participantDto = new ParticipantDto();
+        participantDto.setName("xyz");
+        participantDto.setAge(10);
+
+        //Mock repo
+        Participant participantInput = new Participant();
+        participantInput.setName("xyz");
+        participantInput.setAge(10);
+
+        Participant participantOutput = new Participant();
+        participantOutput.setPartId(1L);
+        participantOutput.setName("xyz");
+        participantOutput.setAge(10);
+
+        ParticipantDto participantDtoOutput = new ParticipantDto();
+        participantDtoOutput.setId(1L);
+        participantDtoOutput.setName("xyz");
+        participantDtoOutput.setAge(10);
+
+        when(modelMapper.map(participantDto, Participant.class)).thenReturn(participantInput);
+        when(participantRepository.save(participantInput)).thenReturn(participantOutput);
+        when(modelMapper.map(participantOutput, ParticipantDto.class)).thenReturn(participantDtoOutput);
+
+        //call
+        ParticipantDto participantDtoResponse = participantService.createParticipant(participantDto);
+
+        //Assert
+        assertEquals(participantDtoResponse.getId(), participantOutput.getPartId());
+
+    }
+
+    @Test
+    void updateParticipant() {
+    }
+
+    @Test
+    void getParticipantById() {
+    }
+
+    @Test
+    void deleteParticipantById() {
     }
 }

@@ -4,6 +4,7 @@ import com.example.bestpracticespringapi.dto.ParticipantDto;
 import com.example.bestpracticespringapi.model.Participant;
 import com.example.bestpracticespringapi.repository.ParticipantRepository;
 import com.example.bestpracticespringapi.service.ParticipantService;
+import jakarta.servlet.http.Part;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -16,8 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest // so that we have sprint context
+@SpringBootTest // so that we have sprint context, this becomes more or integration test
+    // But this simplfies as from spring context you can call any bean.
 class ParticipantServiceImplTest {
 
     @Autowired
@@ -59,6 +62,29 @@ class ParticipantServiceImplTest {
 
     @Test
     void createParticipant() {
+        // Don't have to mock ModelMapper behaviour, this is simple
+        //Mock Data
+        ParticipantDto participantDto = new ParticipantDto();
+        participantDto.setName("xyz");
+        participantDto.setAge(10);
+
+        //Mock repo
+        Participant participant = new Participant();
+        participant.setPartId(1L);
+        participant.setName("xyz");
+        participant.setAge(10);
+
+        Participant participantInput = modelMapper.map(participantDto, Participant.class);
+        when(participantRepository.save(participantInput)).thenReturn(participant);
+        ParticipantDto participantDtoOutput = modelMapper.map(participant, ParticipantDto.class);
+
+        //call
+        ParticipantDto participantResponse = participantService.createParticipant(participantDto);
+
+
+        //Assert
+        assertEquals(participantDtoOutput, participantResponse);
+
     }
 
     @Test
