@@ -17,17 +17,24 @@ import java.util.stream.Collectors;
 public class ParticipantServiceImpl implements ParticipantService {
 
     @Autowired
-    ModelMapper modelMapper;
+    final ModelMapper modelMapper;
 
     private final ParticipantRepository participantRepository; //Autowired not required instead use at constructor, helpful in test mock
 
-    public ParticipantServiceImpl(ParticipantRepository participantRepository) {
+//    public ParticipantServiceImpl(ParticipantRepository participantRepository) {
+//        this.participantRepository = participantRepository;
+//    }
+
+    // Added as during unit test case Model mapper was not getting injected
+    public ParticipantServiceImpl(ModelMapper modelMapper, ParticipantRepository participantRepository) {
+        this.modelMapper = modelMapper;
         this.participantRepository = participantRepository;
     }
 
     @Override
     public List<ParticipantDto> getAllParticipants() {
-        return participantRepository.findAll()
+        List<Participant> participants = participantRepository.findAll();
+        return participants
                 .stream()
                 .map(participant -> modelMapper.map(participant, ParticipantDto.class))
                 .collect(Collectors.toList());
@@ -37,9 +44,8 @@ public class ParticipantServiceImpl implements ParticipantService {
     public ParticipantDto createParticipant(ParticipantDto participantDto) {
         Participant participant = modelMapper.map(participantDto, Participant.class);
         Participant part = participantRepository.save(participant);
-        ParticipantDto participantDtoResponse = modelMapper.map(part, ParticipantDto.class);
 
-        return participantDtoResponse;
+        return modelMapper.map(part, ParticipantDto.class);
     }
 
     @Override

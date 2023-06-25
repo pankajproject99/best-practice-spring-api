@@ -24,33 +24,83 @@
             "path": "/api/participants/10"
         }
 
-![img.png](img.png)
+![img.png](src/main/resources/img/readme/img.png)
 
-![img_1.png](img_1.png)
+![img_1.png](src/main/resources/img/readme/img_1.png)
 
 Out put from Postman For Valid
 Handling Exception via Controller Advice
-![img_2.png](img_2.png)
+![img_2.png](src/main/resources/img/readme/img_2.png)
 
-Service gave NoResource FOund to Controller
-and Controller Handleded Exception with Controller Advice
-![img_3.png](img_3.png)
+Service gave NoResource Found to Controller
+and Controller Handled Exception with Controller Advice
+![img_3.png](src/main/resources/img/readme/img_3.png)
 
-COntroller gave API Response for Allget call
-![img_4.png](img_4.png)
+Controller gave API Response for All get call
+![img_4.png](src/main/resources/img/readme/img_4.png)
 
 
 #### Step 3 : best practice : Test Coverage JACOCO
 https://www.lambdatest.com/blog/reporting-code-coverage-using-maven-and-jacoco-plugin/
 
 Coverage Before
-![img_6.png](img_6.png)
-![img_5.png](img_5.png)
-![img_7.png](img_7.png)
+![img_6.png](src/main/resources/img/readme/img_6.png)
+![img_5.png](src/main/resources/img/readme/img_5.png)
+![img_7.png](src/main/resources/img/readme/img_7.png)
 https://www.baeldung.com/spring-boot-bean-validation
 https://reflectoring.io/spring-boot-web-controller-test/
 
 Coverage After 3 controller method test implementation, 
-![img_9.png](img_9.png)
-![img_10.png](img_10.png)
-![img_11.png](img_11.png)
+![img_9.png](src/main/resources/img/readme/img_9.png)
+![img_10.png](src/main/resources/img/readme/img_10.png)
+![img_11.png](src/main/resources/img/readme/img_11.png)
+
+Run Code Insect Code_31Warnings__Before
+![img_8.png](src/main/resources/img/readme/img_8.png)
+After Some Cleanup
+![img_12.png](src/main/resources/img/readme/img_12.png)
+
+#### Step 3_2 : best practice : Test Coverage Pending
+clean verify : to check code rules set in jacoco:check goal are met or not.
+![img.png](src/main/resources/img/readme/img13.png)
+
+Selenium provides better
+    browser coverage
+    Parallel testing
+
+https://reflectoring.io/spring-boot-web-controller-test/
+
+
+Tags for Integration Test and Unit Test
+https://medium.com/edataconsulting/how-to-add-integration-tests-to-our-spring-boot-backend-8ab00313b6ad
+
+    To run our tests, we can execute any of these commands: mvn verify, mvn install, or mvn deploy.
+    With Spring Boot 1.4, things should get simpler. There is a single @SpringBootTest annotation to use for regular tests
+
+Cucumber Integration test
+This needs runing system use for E2E
+https://www.baeldung.com/cucumber-spring-integration
+With cucumber report under target/cucumber-report.html
+![img.png](img.png)
+
+
+Separate Unit Test with Cucumber Integration Test TOBE
+![img_1.png](img_1.png)
+https://stackoverflow.com/questions/18164579/how-do-i-specify-a-separate-maven-goal-for-running-cucumber-acceptance-tests
+http://www.weblogism.com/item/334/integration-tests-with-cucumber-jvm-selenium-and-maven
+
+Run JUNIT Test separately for different type
+like UnitTest, IntegrationTest
+Solution1 : @Tag(UnitTest)
+![img_2.png](img_2.png)
+Solution2: Create custom annotation e.g. @IntegrationTest
+![img_3.png](img_3.png)
+![img_4.png](img_4.png)
+
+Run all Test from Junit
+This runs all test Unit, Integration, Cucumber etc
+![img_5.png](img_5.png)
+![img_6.png](img_6.png
+
+Coverage Above 80% now
+![img_7.png](img_7.png)

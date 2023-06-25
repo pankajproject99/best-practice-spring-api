@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/participants") // use plural names
 public class ParticipantController {
 
-    ParticipantService participantService;
+    final ParticipantService participantService;
 
     public ParticipantController(ParticipantService participantService) {
         this.participantService = participantService;
@@ -31,7 +31,7 @@ public class ParticipantController {
     }
 
     @PostMapping
-    public ResponseEntity<ParticipantDto> createParticipant(@RequestBody ParticipantDto participantDto){
+    public ResponseEntity<ParticipantDto> createParticipant(@Valid @RequestBody ParticipantDto participantDto){
         ParticipantDto participantDtoResp = participantService.createParticipant(participantDto);
         return new ResponseEntity<>(participantDtoResp, HttpStatus.CREATED);
     }

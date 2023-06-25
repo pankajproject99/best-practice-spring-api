@@ -1,8 +1,6 @@
 package com.example.bestpracticespringapi.dto;
 
-import com.example.bestpracticespringapi.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;

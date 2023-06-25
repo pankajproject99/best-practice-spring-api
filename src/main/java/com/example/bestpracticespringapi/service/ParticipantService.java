@@ -2,7 +2,6 @@ package com.example.bestpracticespringapi.service;
 
 import com.example.bestpracticespringapi.dto.ParticipantDto;
 import com.example.bestpracticespringapi.exception.ResourceNotFoundException;
-import com.example.bestpracticespringapi.model.Participant;
 
 import java.util.List;
 

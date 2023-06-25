@@ -15,6 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<cucmber.version>6.8.0</cucmber.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -34,11 +35,11 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>com.h2database</groupId>-->
-<!--			<artifactId>h2</artifactId>-->
-<!--			<scope>runtime</scope>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
@@ -61,7 +62,7 @@
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>2.4.2</version>
+			<version>3.1.1</version>
 		</dependency>
 
 <!--		For @valid-->
@@ -73,7 +74,34 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!--Selenium dependency-->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.52.0</version>
+			<scope>test</scope>
+		</dependency>
+
+<!--		Cucmber for Spring boot integration test,cucmber=java cucumber-junit, cucumber-spring-->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucmber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>${cucmber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-spring</artifactId>
+			<version>${cucmber.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -142,6 +170,39 @@
 					</execution>
 				</executions>
 			</plugin>
+<!--			Include cucumber test, currently not running with mvn test TOBE-->
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-surefire-plugin</artifactId>-->
+<!--				<version>2.19.1</version>-->
+<!--				<configuration>-->
+<!--					<skipTests>false</skipTests>-->
+<!--					<includes>-->
+<!--						<include>ParticipantControllerIT.java</include>-->
+<!--					</includes>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
+
+			<!--			Cucumber paraellel didnt worked-->
+<!--			<plugin>-->
+<!--				<artifactId>maven-failsafe-plugin</artifactId>-->
+<!--				<version>2.22.2</version>-->
+<!--				<configuration>-->
+<!--					<includes>-->
+<!--						<include>ParticipantControllerIT.java</include>-->
+<!--					</includes>-->
+<!--					<parallel>methods</parallel>-->
+<!--					<threadCount>2</threadCount>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<goals>-->
+<!--							<goal>integration-test</goal>-->
+<!--							<goal>verify</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
