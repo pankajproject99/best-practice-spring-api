@@ -5,6 +5,7 @@ import com.example.bestpracticespringapi.dto.ApiResponse;
 import com.example.bestpracticespringapi.dto.ParticipantDto;
 import com.example.bestpracticespringapi.exception.ResourceNotFoundException;
 import com.example.bestpracticespringapi.service.ParticipantService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -74,7 +76,7 @@ class ParticipantControllerIntegrationTest {
         participantDtoResponse.setName("mmm");
         participantDtoResponse.setAge(200);
 
-        Mockito.when(participantService.createParticipant(participantDtoRequest)).thenReturn(participantDtoResponse);
+        when(participantService.createParticipant(participantDtoRequest)).thenReturn(participantDtoResponse);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/participants")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -125,7 +127,20 @@ class ParticipantControllerIntegrationTest {
     }
 
     @Test
-    void getParticipantById() {
+    void getParticipantById() throws Exception {
+
+        //Mock service
+        ParticipantDto participantDto = new ParticipantDto(1L, "xyz", 10);
+        when(participantService.getParticipantById(1L)).thenReturn(participantDto);
+
+        //Call
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/participants/1"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.content().string(objectMapper.writeValueAsString(participantDto)))
+                .andReturn();
+
+        //Assert N/A as Checked above
     }
 
     @Test
@@ -143,7 +158,7 @@ class ParticipantControllerIntegrationTest {
         participantDtoResponse.setAge(13);
 
         //Mock Service
-        Mockito.when(participantService.updateParticipant(1L, participantDtoRequest)).thenReturn(participantDtoResponse);
+        when(participantService.updateParticipant(1L, participantDtoRequest)).thenReturn(participantDtoResponse);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/participants/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -156,7 +171,6 @@ class ParticipantControllerIntegrationTest {
 
     @Test
     void updateParticipantNotFound() throws Exception {
-
 //        Using object as Object Mapper will be used for JSON to Object conversion
         ParticipantDto participantDtoRequest = new ParticipantDto();
         participantDtoRequest.setName("pan");
@@ -170,7 +184,7 @@ class ParticipantControllerIntegrationTest {
         apiResponse.setSuccess(false);
 
         //Mock Service, instead of object test Throw Exception
-        Mockito.when(participantService.updateParticipant(1L, participantDtoRequest))
+        when(participantService.updateParticipant(1L, participantDtoRequest))
                 .thenThrow(new ResourceNotFoundException("Participant", "id", 1L));
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/participants/{id}", 1L)
@@ -182,6 +196,12 @@ class ParticipantControllerIntegrationTest {
     }
 
     @Test
-    void deleteParticipant() {
+    void deleteParticipant() throws Exception {
+        //Call
+        ApiResponse apiResponse = new ApiResponse(true, "Participant deleted successfully", HttpStatus.OK);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/participants/{id}", 1L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(objectMapper.writeValueAsString(apiResponse)))
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
 }

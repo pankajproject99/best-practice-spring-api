@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -38,7 +39,21 @@ class ExceptionHandlerControllerAdviceTest {
     }
 
     @Test
-    void handleHttpMessageNotReadableExceptionWithSpringAnnotationResponse() {
+    void handleHttpMessageNotReadableExceptionWithSpringAnnotationResponse() throws Exception {
+        String requestBody = """
+                    "name" : "pan",
+                    "age" : 12
+                }
+                """;
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/participants")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andReturn();
+
+        assertEquals(mvcResult.getResponse().getStatus(), HttpStatus.BAD_REQUEST.value());
+        ApiResponse apiResponse = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), ApiResponse.class);
+        assertTrue(apiResponse.getMessage().contains("httpMessageNotReadableException"));
     }
 
     @Test
