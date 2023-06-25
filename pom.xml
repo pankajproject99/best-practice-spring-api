@@ -104,6 +104,12 @@
 			<version>${cucmber.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+<!--		Thenleaf for sample UI and later Test with Cucumber Selenium-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
