@@ -60,7 +60,7 @@ Run Code Insect Code_31Warnings__Before
 After Some Cleanup
 ![img_12.png](src/main/resources/img/readme/img_12.png)
 
-#### Step 3_2 : best practice : Test Coverage Selenium
+#### Step 3_2 : best practice : Test Coverage Pending
 clean verify : to check code rules set in jacoco:check goal are met or not.
 ![img.png](src/main/resources/img/readme/img13.png)
 
