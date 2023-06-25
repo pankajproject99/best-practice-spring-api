@@ -1,11 +1,9 @@
 package com.example.bestpracticespringapi.dto;
 
-import io.cucumber.messages.internal.com.google.protobuf.Api;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ApiResponseTest {
 

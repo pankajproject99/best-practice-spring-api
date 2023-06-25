@@ -93,7 +93,7 @@ Run JUNIT Test separately for different type
 like UnitTest, IntegrationTest
 Solution1 : @Tag(UnitTest)
 ![img_2.png](img_2.png)
-Solution2: Create custom annotation eg @IntegrationTest
+Solution2: Create custom annotation e.g. @IntegrationTest
 ![img_3.png](img_3.png)
 ![img_4.png](img_4.png)
 

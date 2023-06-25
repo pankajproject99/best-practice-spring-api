@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class ParticipantServiceImpl implements ParticipantService {
 
     @Autowired
-    ModelMapper modelMapper;
+    final ModelMapper modelMapper;
 
     private final ParticipantRepository participantRepository; //Autowired not required instead use at constructor, helpful in test mock
 

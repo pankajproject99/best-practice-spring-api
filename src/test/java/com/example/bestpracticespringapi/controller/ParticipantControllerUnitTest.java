@@ -4,6 +4,7 @@ import com.example.bestpracticespringapi.customAnnotation.UnitTest;
 import com.example.bestpracticespringapi.dto.ApiResponse;
 import com.example.bestpracticespringapi.dto.ParticipantDto;
 import com.example.bestpracticespringapi.service.ParticipantService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @UnitTest
@@ -55,7 +55,7 @@ public class ParticipantControllerUnitTest {
         ResponseEntity<ApiResponse> response = participantController.getAllParticipants();
 
         //Assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(apiResponse, response.getBody());
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals(apiResponse, response.getBody());
     }
 }

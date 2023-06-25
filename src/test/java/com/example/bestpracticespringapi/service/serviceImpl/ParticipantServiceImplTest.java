@@ -5,8 +5,6 @@ import com.example.bestpracticespringapi.exception.ResourceNotFoundException;
 import com.example.bestpracticespringapi.model.Participant;
 import com.example.bestpracticespringapi.repository.ParticipantRepository;
 import com.example.bestpracticespringapi.service.ParticipantService;
-import jakarta.servlet.http.Part;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
@@ -17,7 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -33,10 +32,6 @@ class ParticipantServiceImplTest {
 
     @MockBean
     ParticipantRepository participantRepository;
-
-    @BeforeEach
-    void setUp() {
-    }
 
     @Test
     void getAllParticipants() {
@@ -119,16 +114,14 @@ class ParticipantServiceImplTest {
     @Test
     void updateParticipantFailedWithMessage(){
         //Mock Data
-        Long mockId = 1L;
+        long mockId = 1L;
 
         ParticipantDto participantDto = new ParticipantDto();
         participantDto.setName("xyz");
         participantDto.setAge(10);
 
         //Assert Throws
-        ResourceNotFoundException resourceNotFoundException = assertThrows(ResourceNotFoundException.class, () -> {
-            participantService.updateParticipant(mockId, participantDto);
-        });
+        ResourceNotFoundException resourceNotFoundException = assertThrows(ResourceNotFoundException.class, () -> participantService.updateParticipant(mockId, participantDto));
 
         //Assert Message
         String actualMessage = resourceNotFoundException.getMessage();
@@ -161,9 +154,7 @@ class ParticipantServiceImplTest {
         Long mockId = 1L;
 
         //Assert
-        assertThrows(ResourceNotFoundException.class, () -> {
-            participantService.getParticipantById(mockId);
-        });
+        assertThrows(ResourceNotFoundException.class, () -> participantService.getParticipantById(mockId));
     }
 
     @Test
@@ -191,9 +182,7 @@ class ParticipantServiceImplTest {
         Long mockId = 1L;
 
         //Assert Throws
-        ResourceNotFoundException resourceNotFoundException = assertThrows(ResourceNotFoundException.class, () -> {
-            participantService.deleteParticipantById(mockId);
-        });
+        ResourceNotFoundException resourceNotFoundException = assertThrows(ResourceNotFoundException.class, () -> participantService.deleteParticipantById(mockId));
 
         //Assert Message
         String actualMessage = resourceNotFoundException.getMessage();
