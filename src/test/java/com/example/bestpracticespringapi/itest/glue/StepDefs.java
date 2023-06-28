@@ -4,15 +4,22 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.springframework.http.MediaType;
+//import org.apache.http.client.methods.CloseableHttpResponse;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.client.methods.HttpPost;
+//import org.apache.http.client.methods.HttpUriRequest;
+//import org.apache.http.entity.StringEntity;
+//import org.apache.http.impl.client.CloseableHttpClient;
+//import org.apache.http.impl.client.HttpClients;
+
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,33 +31,55 @@ public class StepDefs {
     final private String baseUrl = "http://localhost:8080";
     private int actResponseCode;
 
-    private void callApiMethod(String method, String service, String requestPayLoad) throws IOException {
-        final CloseableHttpClient httpClient = HttpClients.createDefault();
+    private void callApiMethod(String method, String service, String requestPayLoad) throws IOException, URISyntaxException, InterruptedException {
+        //        final CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpClient httpClient = HttpClient.newHttpClient();
         String url = baseUrl + service;
 
         log.info("[{}] Request URL : {}", method, url);
-        HttpUriRequest request;
+        HttpRequest request;
         if("POST".equalsIgnoreCase(method)) {
-            final HttpPost post = new HttpPost(url);
-            post.setHeader("Content-Type", "application/json");
-            if(requestPayLoad!=null){
-                post.setEntity(new StringEntity(requestPayLoad));
-            }
-            request = post;
+            request = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .POST(HttpRequest.BodyPublishers.ofString(requestPayLoad))
+                    .setHeader("Content-Type", MediaType.APPLICATION_JSON.toString())
+                    .build();
+
+//            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
+//                    .uri(new URI(url));
+//
+//            if (requestPayLoad!=null) {
+//                requestBuilder.POST(HttpRequest.BodyPublishers.ofString(requestPayLoad));
+//            } else {
+//                requestBuilder.POST(null);
+//            }
+//
+//            request = requestBuilder.build();
+
+//            final HttpPost post = new HttpPost(url);
+//            post.setHeader("Content-Type", "application/json");
+//            if(requestPayLoad!=null){
+//                post.setEntity(new StringEntity(requestPayLoad));
+//            }
+//            request = post;
         } else {
-            request = new HttpGet(url);
+//            request = new HttpGet(url);
+            request = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .GET()
+                    .build();
         }
 
-        final CloseableHttpResponse response = httpClient.execute(request);
-        actResponseCode = response.getStatusLine().getStatusCode();
+        final HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        actResponseCode = response.statusCode();
     }
 
-    private void callApiMethod(final String method, final String service) throws IOException {
+    private void callApiMethod(final String method, final String service) throws IOException, URISyntaxException, InterruptedException {
         this.callApiMethod(method, service, null);
     }
 
     @When("I send a {string} request to {string}")
-    public void apiRequest(String method, String service) throws IOException {
+    public void apiRequest(String method, String service) throws IOException, URISyntaxException, InterruptedException {
         callApiMethod(method, service);
     }
 
@@ -61,7 +90,7 @@ public class StepDefs {
     }
 
     @When("I POST this json request to {string}")
-    public void postJsonToApiMethod(final String service, final String json) throws IOException {
+    public void postJsonToApiMethod(final String service, final String json) throws IOException, URISyntaxException, InterruptedException {
         callApiMethod("POST", service, json);
     }
 }

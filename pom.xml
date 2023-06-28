@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<cucmber.version>6.8.0</cucmber.version>
+		<selenium.verion>4.0.0</selenium.verion>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -77,13 +78,27 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
-		<!--Selenium dependency-->
+		<!--Selenium Webdriver dependency-->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>2.52.0</version>
+			<version>4.0.0</version>
 			<scope>test</scope>
 		</dependency>
+<!--		Chrome driver-->
+<!--		<dependency>-->
+<!--			<groupId>org.seleniumhq.selenium</groupId>-->
+<!--			<artifactId>selenium-chrome-driver</artifactId>-->
+<!--			<version>4.0.0</version>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
+		<!-- Firefox Driver -->
+<!--		<dependency>-->
+<!--			<groupId>org.seleniumhq.selenium</groupId>-->
+<!--			<artifactId>selenium-firefox-driver</artifactId>-->
+<!--			<version>4.0.0</version>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
 
 <!--		Cucmber for Spring boot integration test,cucmber=java cucumber-junit, cucumber-spring-->
 		<dependency>

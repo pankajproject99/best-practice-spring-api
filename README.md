@@ -104,3 +104,12 @@ This runs all test Unit, Integration, Cucumber etc
 
 Coverage Above 80% now
 ![img_7.png](img_7.png)
+
+#### Step4_Sample_ThemleafUI
+
+Added Themleaf login page
+Added Login Controller
+Was facing issue with Selenium open chrome
+    1. Migrated Selenium version from 2.50.0 to 4.0.0
+    2. Used chrome driver instead of chrome
+        https://chromedriver.chromium.org/downloads
