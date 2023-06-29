@@ -113,3 +113,52 @@ Was facing issue with Selenium open chrome
     1. Migrated Selenium version from 2.50.0 to 4.0.0
     2. Used chrome driver instead of chrome
         https://chromedriver.chromium.org/downloads
+
+#### Step5_Create_Module_frontend_backend
+Migration step
+1. Open your existing Spring Boot project in IntelliJ IDEA.
+
+2. Create the frontend module:
+
+. Right-click on the project root directory in the Project tool window.
+. Select "New" -> "Module" from the context menu.
+. Choose "Java" and click "Next".
+. Set the module name as "frontend" and specify the module content root directory.
+. Click "Finish" to create the frontend module.
+
+3. Move the existing Spring Boot backend into the backend module:
+. Create a new directory for the backend module. Right-click on the project root directory in the Project tool window and select "New" -> "Module".
+. Choose "Java" and click "Next".
+. Specify the module name as "backend" and set the module content root directory.
+. Click "Finish" to create the backend module.
+. Move all the backend-related files and directories, including the src directory, pom.xml, and any other backend-specific files, into the backend module's content root directory.
+
+4. Update Package inside each file
+
+Below not required
+. Open the main pom.xml file in IntelliJ IDEA.
+. Update the <groupId>, <artifactId>, and <version> elements to match your project's configuration.
+. Add the configuration for the frontend and backend modules inside the <modules> section of the pom.xml file:
+xml
+Copy code
+<modules>
+<module>backend</module>
+<module>frontend</module>
+</modules>
+
+6. Update the backend module's configuration:
+Open the backend/pom.xml file.
+Update the <groupId>, <artifactId>, and <version> elements to match your backend module's configuration.
+Add the necessary dependencies for your backend development, such as Spring Boot Starter, Spring Web, Spring Data JPA, etc.
+
+7. Update the frontend module's configuration:
+
+Open the frontend/package.json file.
+Update the name and version fields to match your frontend module's configuration.
+Include any necessary frontend dependencies and scripts in the package.json file, such as Axios, React Router, etc.
+8. Build and run the project:
+
+Right-click on the main pom.xml file and select "Maven" -> "Reimport" to update the project configuration.
+Build the project to ensure that both the backend and frontend modules are included in the build process.
+Start the Spring Boot application to run both the backend and frontend modules together.
+
