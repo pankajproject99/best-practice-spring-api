@@ -12,40 +12,17 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>best-practice-spring-common-app</artifactId>
-<!--    <packaging>pom</packaging>-->
+    <packaging>jar</packaging>
     <!--    package pom: frontend bcz no jar requrired-->
 
     <build>
-        <resources>
-            <resource>
-                <directory>../frontend/build</directory>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>../backend/target</directory>
-                <includes>
-                    <include>*.jar</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
-            <!-- Configure any build plugins required for combining artifacts -->
+<!--            Copy front end resources-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.3.1</version>
                 <executions>
-                    <execution>
-                        <configuration>
-                            <archive>
-                                <manifest>
-                                    <addClasspath>true</addClasspath>
-                                    <classpathPrefix>lib</classpathPrefix>
-                                    <mainClass>com.example.bestpracticespringapi.BestPracticeSpringApiApplication</mainClass>
-                                </manifest>
-                            </archive>
-                        </configuration>
-                    </execution>
                     <execution>
                         <id>copy-frontend-resources</id>
                         <phase>package</phase>
@@ -61,6 +38,27 @@
                                 </resource>
                             </resources>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+<!--            Attach frontend and backend artifacts-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/combined.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-combined-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
