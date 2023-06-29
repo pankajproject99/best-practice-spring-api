@@ -4,4 +4,5 @@ Feature: User Login
     When I enter username "testuser" and password "password"
     And I click the login button
     Then I should be redirected to the home page
-    And I should see "Welcome, testuser"
+    And I should see "Welcome, you have successfully logged" message
+    And I should see username "testuser" and password "password"

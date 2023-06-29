@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
 </head>
 <body>
 <h1>Login Page</h1>
-<form action="/login" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required/><br/>
+<!--Form Page without using Themlead-->
+<!--<form action="/login" method="post">-->
+<!--    <label for="username">Username:</label>-->
+<!--    <input type="text" id="username" name="username" required/><br/>-->
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required/><br/>
+<!--    <label for="password">Password:</label>-->
+<!--    <input type="password" id="password" name="password" required/><br/>-->
 
-    <input type="submit" value="Login"/>
+<!--    <input type="submit" id="login-button" value="Login"/>-->
+<!--</form>-->
+<!--Form Page usig Theamleaf but will need Model view in GET:/login page-->
+<form action="/login" method="post" th:object="${user}">
+    <input type="text" th:field="*{username}" placeholder="Username">
+    <input type="password" th:field="*{password}" placeholder="Password">
+    <button type="submit">Login</button>
 </form>
 </body>
 </html>
