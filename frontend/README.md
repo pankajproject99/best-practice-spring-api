@@ -85,3 +85,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 Home.js with button to launc another URL in window
 npm install @mui/material @emotion/react @emotion/styled
 
+Fixed: App.spec.js 
+Gave Error
+    ![img_2.png](img_2.png)
+Worked
+    ![img_3.png](img_3.png)
+Explanation
+![img_1.png](img_1.png)
+
+Coverage Report
+    Run Config : ![img_5.png](img_5.png)
+    Coverage Report : ![img_4.png](img_4.png)
