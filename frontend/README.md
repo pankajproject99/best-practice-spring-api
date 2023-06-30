@@ -81,3 +81,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ![img.png](img.png)
 
 ### Step5_Create_Module_frontend_backend
+
+Home.js with button to launc another URL in window
+npm install @mui/material @emotion/react @emotion/styled
+
