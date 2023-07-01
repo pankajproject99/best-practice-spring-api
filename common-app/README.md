@@ -1,0 +1,1 @@
+# Common module for single fat JAR or executable jar for common jar for frontend and backend
