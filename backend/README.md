@@ -162,3 +162,5 @@ Right-click on the main pom.xml file and select "Maven" -> "Reimport" to update 
 Build the project to ensure that both the backend and frontend modules are included in the build process.
 Start the Spring Boot application to run both the backend and frontend modules together.
 
+#### Step6_protect_backend_endpoint
+

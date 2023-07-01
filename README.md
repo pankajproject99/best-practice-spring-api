@@ -5,3 +5,5 @@
 . Parent <artifcatid> : best-practice-spring-api
 . Frontend <artifcatid> : best-practice-spring-api-frontent
 . Backend <artifcatid> : best-practice-spring-backend
+
+#### Step6_protect_backend_endpoint
