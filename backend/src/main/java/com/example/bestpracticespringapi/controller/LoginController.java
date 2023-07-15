@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 public class LoginController {
 
-    @GetMapping("/login")
+//    @GetMapping("/login")
     public String showLoginPage(Model model) {
         model.addAttribute("user", new UserDto());
         //Fixed: Model is required only if we are using Themleaf login page where Im defining userDto Object

@@ -163,4 +163,15 @@ Build the project to ensure that both the backend and frontend modules are inclu
 Start the Spring Boot application to run both the backend and frontend modules together.
 
 #### Step6_protect_backend_endpoint
+Controller Security:
+    Http level and routing(Should be implemented as Spring Security)
+Service Security:
+    Usually you dont need.
+    Method level() : Mainly used to protect specific business logic
+        eg @Security("ROLE_ADMIN"), @RolesAllowed("ROLE_ADMIN"),
+        @PreAuthorize("hasRole('ROLE_ADMIN') and hasPermission(#id, 'write')") >>>>>>> can hanlde complex
+https://javatechonline.com/spring-security-userdetailsservice-using-spring-boot-3/
+Before Spring 3 and After Spring booot 3
+![img_8.png](img_8.png)
+
 
